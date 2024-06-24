@@ -1,5 +1,5 @@
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../Utils/AppContext';
 const {width} = Dimensions.get('window');
 import firebase from '../Authentication/FirebaseAuth';
@@ -12,6 +12,7 @@ const ProfileScreen = () => {
     const [newName, setNewName] = useState(user.displayName);
     const navigation = useNavigation();
 
+
     const pickImage = async () =>{
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes:ImagePicker.MediaTypeOptions.Images,
@@ -21,7 +22,6 @@ const ProfileScreen = () => {
         });
 
         if(!result.canceled){
-            // console.log(result.assets[0].uri)
             setProfileImg(result.assets[0].uri);
         }
     };
@@ -39,11 +39,10 @@ const ProfileScreen = () => {
             await firebase.auth().currentUser.updateProfile({ displayName: newName });
         }
 
-        setProfileImg(null)
-        navigation.goBack();
+        setProfileImg(null);
+        navigation.navigate('Home');
     };
-
-    console.log(profileImg);
+    
 
   return (
     <View style={styles.container} >
@@ -70,7 +69,7 @@ const ProfileScreen = () => {
             <Text>Update Profile</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={()=>{navigation.navigate("HomeScreen")}} style={styles.btn}>
+        <TouchableOpacity onPress={()=>{navigation.goBack()}} style={styles.btn}>
             <Text>Go Back</Text>
         </TouchableOpacity>
 

@@ -10,6 +10,7 @@ const AppProvider = ({children})=>{
     const [password, setPassword] = useState("");
     const [user, setUser] = useState(null);
     const [profileImg, setProfileImg] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
     // Initialize the User if it exists
@@ -28,6 +29,7 @@ const AppProvider = ({children})=>{
     // Sign up Functionality
 
     const signup = async ()=>{
+        setLoading(true);
         try {
             const userCred = await firebase.auth().createUserWithEmailAndPassword(email, password);
             await userCred.user.updateProfile({displayName:name});
@@ -39,28 +41,34 @@ const AppProvider = ({children})=>{
         } catch (error) {
             console.error("Error signing up:", error);
         }
+        setLoading(false);
     }
 
     // Log In Functionality
 
     const login = async () =>{
+        setLoading(true);
         try {
             const userCred = await firebase.auth().signInWithEmailAndPassword(email, password);
             console.log("User Logged In");
         } catch (error) {
             console.log("Error Logging In", error);
         }
+        setLoading(false);
+
     }
 
     // logout Functionality
 
     const logout = async () =>{
+        setLoading(true);
         try {
             await firebase.auth().signOut();
             console.log("User Logged Out");
         } catch (error) {
             console.log("Error Logging Out", error);
         }
+        setLoading(false);
     }
 
     // Update Profile

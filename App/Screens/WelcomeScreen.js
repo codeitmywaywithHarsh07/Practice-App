@@ -1,11 +1,12 @@
 import { Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect} from 'react'
 import { AppContext } from '../Utils/AppContext';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const {width} = Dimensions.get('window');
 
 const WelcomeScreen = ({navigation}) => {
-    const {name, email, password, user, login, signup, setName, setPassword, setEmail} = useContext(AppContext);
+    const {name, email, password, user, login, signup, setName, setPassword, setEmail, loading} = useContext(AppContext);
     console.log("Welcome Screen User --->",user)
 
     React.useEffect(()=>{
@@ -17,6 +18,7 @@ const WelcomeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Spinner textContent='Loading...' visible={loading} style={{color:"blue"}}/>
       <Image style={styles.logoImage} source={require("../../assets/winuallwhite.png")} alt='Logo'/>
       <View>
         <Text style={styles.label}>Name</Text>

@@ -10,16 +10,18 @@ import { Fontisto } from '@expo/vector-icons';
 import QueryForm from '../Components/QueryForm';
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from '../Utils/AppContext';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const {width} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const {user} = useContext(AppContext);
+  const {user, loading} = useContext(AppContext);
 
     console.log("Home Screen User --->",user)
   return (
     <View>
+      <Spinner textContent='Loading...' visible={loading} style={styles.spinnerStyle}/>
         <Header userObj={user}/>
         
         <ScrollView>
@@ -141,5 +143,8 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     paddingVertical:20,
     borderRadius:20
+  },
+  spinnerStyle:{
+    color:"black"
   }
 })
