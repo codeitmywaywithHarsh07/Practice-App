@@ -2,8 +2,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext } from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { AppContext } from '../Utils/AppContext';
-import { Link, useNavigation } from '@react-navigation/native';
-import ProfileScreen from '../Screens/ProfileScreen';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Header = () => {
   const {user, logout} = useContext(AppContext);
@@ -23,7 +23,11 @@ const Header = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={[styles.profileHeader,{cursor:"pointer"}]} onPress={handleProfilePress}>
-        {user && (!user.photoURL ? <Text style={styles.profileIcon}>{user.displayName && user.displayName.charAt(0)}</Text> : <Image source={{uri:user.photoURL}} style={styles.profileImage}/> )}
+        {user && (!user.photoURL ? 
+          <Text style={styles.profileIcon}>{user.displayName && user.displayName.charAt(0)}</Text> : 
+          <Image source={{uri:user.photoURL}} style={styles.profileImage}/> 
+        )}
+        
         <Text style={{fontWeight:"500",}}>{user && user.displayName}</Text>
       </TouchableOpacity>
 

@@ -13,9 +13,9 @@ import { AppContext } from '../Utils/AppContext';
 
 const {width} = Dimensions.get('window');
 
-const HomeScreen = ({route}) => {
+const HomeScreen = () => {
   const navigation = useNavigation();
-  const {user,setUser} = useContext(AppContext);
+  const {user} = useContext(AppContext);
 
     console.log("Home Screen User --->",user)
   return (

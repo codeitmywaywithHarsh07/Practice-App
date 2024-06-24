@@ -5,7 +5,6 @@ const {width} = Dimensions.get('window');
 import firebase from '../Authentication/FirebaseAuth';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
-import HomeScreen from './HomeScreen';
 
 
 const ProfileScreen = () => {
