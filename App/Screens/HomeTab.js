@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeScreen from './Screens/HomeScreen';
-import SettingScreen from './Screens/SettingScreen';
+import HomeScreen from './HomeScreen';
+import SettingScreen from './SettingScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import CourseScreen from './Screens/CourseScreen';
+import CourseScreen from './CourseScreen';
 import { Ionicons } from '@expo/vector-icons';
-import { AppContext } from './Utils/AppContext';
+import { AppContext } from '../Utils/AppContext';
 
 const Tab = createBottomTabNavigator();
 

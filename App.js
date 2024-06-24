@@ -4,7 +4,7 @@ import WelcomeScreen from './App/Screens/WelcomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './App/Screens/HomeScreen';
-import HomeTab from './App/HomeTab';
+import HomeTab from './App/Screens/HomeTab';
 import CourseScreen from './App/Screens/CourseScreen';
 import { AppProvider } from './App/Utils/AppContext';
 import ProfileScreen from './App/Screens/ProfileScreen';
