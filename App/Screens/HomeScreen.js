@@ -11,16 +11,21 @@ import QueryForm from '../Components/QueryForm';
 import { useNavigation } from '@react-navigation/native';
 import { AppContext } from '../Utils/AppContext';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { ColorThemeContext } from '../Utils/ColorThemeContext';
+import { darkTheme, lightTheme } from '../Utils/ColorTheme';
+
 
 const {width} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {user, loading} = useContext(AppContext);
+  const {isDark} = useContext(ColorThemeContext);
+  const theme = isDark ? darkTheme : lightTheme;
 
     console.log("Home Screen User --->",user)
   return (
-    <View>
+    <View style={{backgroundColor:theme.backgroundColor}}>
       <Spinner textContent='Loading...' visible={loading} style={styles.spinnerStyle}/>
         <Header userObj={user}/>
         
@@ -28,60 +33,60 @@ const HomeScreen = () => {
 
             <View style={styles.body}>
               <View style={styles.categoryContent} >
-                <Text style={styles.title}>Categories</Text>
+                <Text style={[styles.title, { color: theme.textColor }]}>Categories</Text>
                 <ScrollView 
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.categories}>
-                  <FontAwesome5 style={styles.icon} name="react" size={24} color="black" />
-                  <FontAwesome5 style={styles.icon} name="java" size={24} color="black" />
-                  <Ionicons style={styles.icon} name="logo-javascript" size={24} color="black" />
-                  <FontAwesome5 style={styles.icon} name="node-js" size={24} color="black" />
-                  <AntDesign style={styles.icon} name="HTML" size={24} color="black" />
-                  <FontAwesome5 style={styles.icon}  name="css3" size={24} color="black" />
-                  <FontAwesome5 name="python" style={styles.icon} size={24} color="black" />
-                  <Fontisto name="mongodb" size={24} style={styles.icon} color="black" />
+                  <FontAwesome5 style={[styles.icon, { backgroundColor: theme.iconBackground }]} name="react" size={24} color="black" />
+                  <FontAwesome5 style={[styles.icon, { backgroundColor: theme.iconBackground }]} name="java" size={24} color="black" />
+                  <Ionicons style={[styles.icon, { backgroundColor: theme.iconBackground }]} name="logo-javascript" size={24} color="black" />
+                  <FontAwesome5 style={[styles.icon, { backgroundColor: theme.iconBackground }]} name="node-js" size={24} color="black" />
+                  <AntDesign style={[styles.icon, { backgroundColor: theme.iconBackground }]} name="HTML" size={24} color="black" />
+                  <FontAwesome5 style={[styles.icon, { backgroundColor: theme.iconBackground }]}  name="css3" size={24} color="black" />
+                  <FontAwesome5 name="python" style={[styles.icon, { backgroundColor: theme.iconBackground }]} size={24} color="black" />
+                  <Fontisto name="mongodb" size={24} style={[styles.icon, { backgroundColor: theme.iconBackground }]} color="black" />
                 </ScrollView>
               </View>
 
               <View style={styles.content}>
-                <Text style={styles.title}>Top Courses</Text>
+                <Text style={[styles.title, { color: theme.textColor }]}>Top Courses</Text>
                 <ScrollView 
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.categories}>
-                  <View style={styles.courseModal}>
+                  <View style={[styles.courseModal, { backgroundColor: theme.backgroundColor }]}>
                       <Image source={{uri:"https://d502jbuhuh9wk.cloudfront.net/courses/6610ef3fc32f6201821ac503/6610ef3fc32f6201821ac503_scaled_cover.jpg?v=1"}} style={styles.courseImage}/>
-                      <Text style={{fontSize: 20,
-        fontWeight: 'bold',}}>DSA Supreme 3.0</Text>
+                      <Text style={[{fontSize: 20,
+        fontWeight: 'bold',},{color: theme.textColor }]}>DSA Supreme 3.0</Text>
                   </View>
                   
-                  <View style={styles.courseModal}>
+                  <View style={[styles.courseModal, { backgroundColor: theme.backgroundColor }]}>
                     <Image source={{uri:"https://media.cosmofeed.com/IMG-20231028-WA0044-2023-29-10-03-12-16.jpg"}} style={styles.courseImage}/>
-                    <Text style={{fontSize: 20,
-        fontWeight: 'bold',}}>Web Development Course</Text>
+                    <Text style={[{fontSize: 20,
+                      fontWeight: 'bold',},{color: theme.textColor }]}>Web Development Course</Text>
                   </View>
 
-                  <View style={styles.courseModal}>
+                  <View style={[styles.courseModal, { backgroundColor: theme.backgroundColor }]}>
                     <Image source={{uri:"https://d502jbuhuh9wk.cloudfront.net/courses/656da487e4b00e2f57191749/656da487e4b00e2f57191749_scaled_cover.jpg?v=3"}} style={styles.courseImage}/>
-                    <Text style={{fontSize: 20,
-        fontWeight: 'bold',}}>Low Level Design BootCamp</Text>
+                    <Text style={[{fontSize: 20,
+        fontWeight: 'bold',},{color: theme.textColor }]}>Low Level Design BootCamp</Text>
                     
                   </View>
 
-                  <View style={styles.courseModal}>
+                  <View style={[styles.courseModal, { backgroundColor: theme.backgroundColor }]}>
                     <Image source={{uri:"https://i.ytimg.com/vi/5LRO2I65aR8/maxresdefault.jpg"}} style={styles.courseImage}/>
 
-                    <Text style={{fontSize: 20,
-        fontWeight: 'bold',}}>Introduction to HTML</Text>
+                    <Text style={[{fontSize: 20,
+        fontWeight: 'bold',},{color: theme.textColor }]}>Introduction to HTML</Text>
 
                   </View>
 
-                  <FontAwesome name="arrow-right" style={styles.icon} size={24} color="black" onPress={()=>{navigation.navigate('CourseScreen',{userObj})}} />
+                  <FontAwesome name="arrow-right" style={[styles.icon, { backgroundColor: theme.iconBackground }]} size={24} color="black" onPress={()=>{navigation.navigate('CourseScreen')}} />
                 </ScrollView>
               </View>
 
-              <QueryForm/>
+              <QueryForm theme={theme}/>
             </View>
 
 
@@ -108,7 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     padding: 15,
     borderRadius: 12,
-    backgroundColor: 'lightblue',
   },
   categoryContent: {
     marginTop: 100,
@@ -140,7 +144,6 @@ const styles = StyleSheet.create({
     display:"flex",
     justifyContent:"flex-start",
     alignItems:"center",
-    backgroundColor:"white",
     paddingVertical:20,
     borderRadius:20
   },

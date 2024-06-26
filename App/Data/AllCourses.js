@@ -47,6 +47,30 @@ const allCourses = [
         instructor:"Jessica Fleming",
         ratings:4.7,
         price:749
+    },
+
+    // -------
+
+    {
+        image:"https://th.bing.com/th/id/OIP.Da4GQB9MBRt3iE2Kp5VXTgHaD4?rs=1&pid=ImgDetMain",
+        title:"Yoga Teacher Training For Trauma, Depression and Anxiety",
+        instructor:"Jessica Fleming",
+        ratings:4.7,
+        price:749
+    },
+    {
+        image:"https://th.bing.com/th/id/OIP.Da4GQB9MBRt3iE2Kp5VXTgHaD4?rs=1&pid=ImgDetMain",
+        title:"Yoga Teacher Training For Trauma, Depression and Anxiety",
+        instructor:"Jessica Fleming",
+        ratings:4.7,
+        price:749
+    },
+    {
+        image:"https://th.bing.com/th/id/OIP.Da4GQB9MBRt3iE2Kp5VXTgHaD4?rs=1&pid=ImgDetMain",
+        title:"Yoga Teacher Training For Trauma, Depression and Anxiety",
+        instructor:"Jessica Fleming",
+        ratings:4.7,
+        price:749
     }
 ];
 

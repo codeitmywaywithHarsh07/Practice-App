@@ -8,39 +8,47 @@ import { Feather } from '@expo/vector-icons';
 import CourseScreen from './CourseScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { AppContext } from '../Utils/AppContext';
+import { darkTheme, lightTheme } from '../Utils/ColorTheme';
+import { ColorThemeContext } from '../Utils/ColorThemeContext';
 
 const Tab = createBottomTabNavigator();
 
 const HomeTab = ({navigation}) => {
     const {user,setUser} = useContext(AppContext);
+    const {isDark} = useContext(ColorThemeContext);
+    const theme = isDark ? darkTheme : lightTheme;
   return (
-    <Tab.Navigator initialRouteName='HomeScreen' screenOptions={{ headerShown: false }}>
+    <Tab.Navigator initialRouteName='HomeScreen' 
+        screenOptions={({route})=>({
+            headerShown: false,
+            tabBarStyle:{backgroundColor:theme.backgroundColor, borderColor:"gray"}
+        })}>
         <Tab.Screen name='Home' options={{
             tabBarIcon: ({color,size})=>{
-                return <FontAwesome5 name="home" size={18} />
+                return <FontAwesome5 style={{color:theme.textColor}} name="home" size={18} />
             },
             tabBarLabelStyle:{fontSize:15},
-            tabBarActiveTintColor:"blue",
+            tabBarActiveTintColor:theme.buttonBackground,
             tabBarInactiveTintColor:"gray"
         }} component={HomeScreen}/>
 
 
         <Tab.Screen name='Course' options={{
             tabBarIcon:(color,size)=>{
-                return <Ionicons name="library" size={18} />
+                return <Ionicons style={{color:theme.textColor}} name="library" size={18} />
             },
             tabBarLabelStyle:{fontSize:15},
-            tabBarActiveTintColor:"blue",
+            tabBarActiveTintColor:theme.buttonBackground,
             tabBarInactiveTintColor:"gray"
         }} component={CourseScreen} />
 
 
         <Tab.Screen name='Settings' options={{
             tabBarIcon:(color,size)=>{
-                return <Feather name="settings" size={18} />
+                return <Feather style={{color:theme.textColor}} name="settings" size={18} />
             },
             tabBarLabelStyle:{fontSize:15},
-            tabBarActiveTintColor:"blue",
+            tabBarActiveTintColor:theme.buttonBackground,
             tabBarInactiveTintColor:"gray"
         }} component={SettingScreen} />
 

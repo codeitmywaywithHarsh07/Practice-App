@@ -2,14 +2,21 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useContext } from 'react'
 import Header from '../Components/Header'
 import { AppContext } from '../Utils/AppContext';
+import { ColorThemeContext } from '../Utils/ColorThemeContext';
+import { darkTheme, lightTheme } from '../Utils/ColorTheme';
 
-const SettingScreen = ({route}) => {
-  const {user,setUser} = useContext(AppContext);
+const SettingScreen = () => {
+  const {user} = useContext(AppContext);
+  const {isDark} = useContext(ColorThemeContext);
+  const theme = isDark ? darkTheme : lightTheme;  
   
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor:theme.backgroundColor}]}>
         <Header userObj={user}/>
-        <Text style={{marginTop:200,fontWeight:"bold"}}>This is the Settings Page</Text>
+        <View>
+          <Text>Settings</Text>
+          
+        </View>
     </View>
   )
 }

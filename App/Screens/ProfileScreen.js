@@ -5,12 +5,16 @@ const {width} = Dimensions.get('window');
 import firebase from '../Authentication/FirebaseAuth';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
+import { ColorThemeContext } from '../Utils/ColorThemeContext';
+import { darkTheme, lightTheme } from '../Utils/ColorTheme';
 
 
 const ProfileScreen = () => {
     const {user, uploadProfilePicture, setUser, profileImg, setProfileImg} = useContext(AppContext);
     const [newName, setNewName] = useState(user.displayName);
     const navigation = useNavigation();
+    const {isDark} = useContext(ColorThemeContext);
+    const theme = isDark ? darkTheme : lightTheme;
 
 
     const pickImage = async () =>{
@@ -45,7 +49,7 @@ const ProfileScreen = () => {
     
 
   return (
-    <View style={styles.container} >
+    <View style={[styles.container, {backgroundColor:theme.backgroundColor}]} >
 
         <View style={{alignItems:"center"}}>
             {user.photoURL ? <Image source={{uri:user.photoURL}} style={styles.profileImage}/> :
@@ -53,24 +57,24 @@ const ProfileScreen = () => {
                     <Text style={{textAlign:"center", color:"white", fontSize:50}} >{user && user.displayName.charAt(0)}</Text>
                 </View>
             }
-            <TouchableOpacity style={styles.btn} onPress={pickImage}><Text>Edit Picture</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.btn} onPress={pickImage}><Text style={{color:theme.buttonTextColor}}>Edit Picture</Text></TouchableOpacity>
         </View>
         <View>
-            <Text style={styles.label}>Name</Text>
-            <TextInput style={styles.input} placeholder='New Name' value={newName} onChangeText={(text)=>{setNewName(text)}}/>
+            <Text style={[styles.label, {color:theme.textColor}]}>Name</Text>
+            <TextInput style={[styles.input, {color:theme.textColor}]} placeholder='New Name' value={newName} onChangeText={(text)=>{setNewName(text)}}/>
         </View>
 
         <View>
-            <Text style={styles.label}>Email</Text>
-            <TextInput style={styles.input} readOnly={true} value={user.email}/>
+            <Text style={[styles.label, {color:theme.textColor}]}>Email</Text>
+            <TextInput style={[styles.input, {color:theme.textColor}]} readOnly={true} value={user.email}/>
         </View>
 
         <TouchableOpacity onPress={updateProfilePicture} style={styles.btn}>
-            <Text>Update Profile</Text>
+            <Text style={{color:theme.buttonTextColor}}>Update Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={()=>{navigation.goBack()}} style={styles.btn}>
-            <Text>Go Back</Text>
+            <Text style={{color:theme.buttonTextColor}}>Go Back</Text>
         </TouchableOpacity>
 
     </View>
